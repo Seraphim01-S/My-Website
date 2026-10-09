@@ -144,6 +144,7 @@
     .project-art { aspect-ratio: 1.66; display: grid; place-items: center; overflow: hidden; position: relative; background: #10101b; }
     .project-art::before, .project-art::after { content: ""; position: absolute; border-radius: 50%; filter: blur(1px); transition: transform .5s ease; }
     .project-card:hover .project-art::before { transform: scale(1.12); }
+    .redaction-stamp { position: absolute; z-index: 2; top: 50%; left: 50%; width: 132%; padding: 10px 0; border: 4px solid #ff5c64; color: #ff636b; background: rgba(20,5,12,.86); box-shadow: 0 0 0 3px rgba(255,92,100,.12), 0 0 28px rgba(255,60,76,.3); font-family: var(--sans); font-size: clamp(18px, 2vw, 32px); font-weight: 800; letter-spacing: .28em; line-height: 1.15; text-align: center; text-shadow: 0 0 12px rgba(255,60,76,.45); white-space: nowrap; transform: translate(-50%, -50%) rotate(-8deg); }
     .art-one { background: radial-gradient(ellipse at center, transparent 34%, rgba(195,170,255,.22) 34.5%, transparent 35.2%), radial-gradient(ellipse at 50% 48%, #202c4c 0, #101525 43%, #090b12 82%); }
     .art-one::before { z-index: 1; width: 48px; height: 58px; border-radius: 0; clip-path: polygon(22% 0, 78% 0, 100% 24%, 100% 76%, 78% 100%, 22% 100%, 0 76%, 0 24%); background: linear-gradient(155deg, #f3d995, #73caff 78%); filter: drop-shadow(0 0 18px rgba(115,202,255,.52)); }
     .art-one::after { z-index: 0; width: 208px; height: 48px; border: 1px solid rgba(115,202,255,.6); border-radius: 2px; background: repeating-linear-gradient(90deg, transparent 0 15px, rgba(9,16,35,.65) 15px 16px), repeating-linear-gradient(180deg, transparent 0 22px, rgba(9,16,35,.55) 22px 23px), linear-gradient(180deg, #759ee0, #25395c); box-shadow: 0 0 20px rgba(102,153,224,.2); }
@@ -158,6 +159,7 @@
     .art-four::before { width: 58px; height: 78px; border: 1px solid rgba(195,170,255,.58); border-radius: 14px 14px 44% 44%; background: linear-gradient(90deg, rgba(115,202,255,.08), rgba(230,196,119,.14), rgba(115,202,255,.08)); box-shadow: 0 0 36px rgba(142,177,241,.2), inset 0 0 24px rgba(142,119,241,.1); transform: translateY(-19px); }
     .art-four::after { width: 110px; height: 92px; border-radius: 0; clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%); background: radial-gradient(ellipse at 50% 0, rgba(250,221,151,.8), rgba(100,177,255,.36) 38%, transparent 76%); transform: translateY(53px); }
     .art-label { z-index: 1; color: rgba(245,242,251,.88); font-family: var(--serif); font-size: 2.1875rem; font-style: italic; text-shadow: 0 2px 22px rgba(0,0,0,.7); }
+    .project-info p::before { content: "CLASSIFIED · "; color: #ff737b; font-size: 9px; letter-spacing: .1em; }
     .project-info { display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 19px 21px 20px; }
     .project-info h3 { margin: 0 0 3px; font-size: 13px; font-weight: 550; }
     .project-info p { margin: 0; color: var(--faint); font-size: 10px; letter-spacing: .035em; }
@@ -166,6 +168,7 @@
     .project-arrow svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
     .project-notes { padding: 0 21px 19px; color: #aebbd1; font-size: 12px; }
     .project-notes p { margin: 0; padding-top: 13px; border-top: 1px solid rgba(155,186,255,.14); }
+    .project-notes strong { color: #ff737b; font-size: 9px; letter-spacing: .15em; }
 
     .contact { padding-bottom: 100px; }
     .contact-panel { position: relative; overflow: hidden; padding: 66px 70px; border: 1px solid rgba(230,196,119,.24); background: radial-gradient(ellipse at 80% 45%, rgba(91,62,145,.19), transparent 47%), #0d0d14; }
@@ -177,6 +180,8 @@
     .contact-panel .button { position: relative; z-index: 1; }
     .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 23px 0; border-top: 1px solid var(--line); color: var(--faint); font-size: 10px; }
     .footer-links { display: flex; gap: 23px; }
+    .footer-motto { padding: 0; border: 0; color: var(--gold); background: transparent; font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .06em; text-decoration: underline dotted rgba(230,196,119,.45); text-underline-offset: 3px; cursor: pointer; transition: color .2s ease, text-decoration-color .2s ease; }
+    .footer-motto:hover, .footer-motto:focus-visible { color: #f2d995; text-decoration-color: var(--gold); }
     .footer-links a { transition: color .2s; }
     .footer-links a:hover { color: var(--gold); }
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
@@ -266,7 +271,7 @@
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="hero-layout wrap">
         <div class="hero-content">
-          <div class="eyebrow">Aspiring aerospace engineer · Always looking up</div>
+          <div class="eyebrow">Aspiring aerospace engineer · Semper ad Caelum</div>
           <h1 id="hero-title">SERAPHIM <span>AEROSPACE</span></h1>
           <h2>Exploring the frontier of flight and space.</h2>
           <p class="hero-copy">I'm Seraphim, an aspiring aerospace engineer fascinated by spacecraft, orbital mechanics, and the science behind exploration. This is where I collect the ideas, questions, and concepts inspiring my journey.</p>
@@ -341,24 +346,24 @@
         <p class="projects-intro reveal">Early concept studies inspired by spacecraft, orbital missions, and the night sky. Explorations, not flight-ready designs.</p>
         <div class="project-grid">
           <article class="project-card reveal">
-            <div class="project-art art-one" aria-label="Illustrative communications satellite with solar arrays" role="img"><span class="art-label">Lagrange</span></div>
+            <div class="project-art art-one" aria-label="Illustrative communications satellite with solar arrays and redacted stamp" role="img"><span class="art-label">Lagrange</span><span class="redaction-stamp" title="Top secret? No, just a concept study." aria-hidden="true">REDACTED</span></div>
             <div class="project-info"><div><h3>Lagrange</h3><p>Satellite systems · Concept study</p></div><button class="project-arrow" type="button" aria-label="Show concept notes: Lagrange" aria-expanded="false" aria-controls="concept-lagrange"><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg></button></div>
-            <div class="project-notes" id="concept-lagrange" hidden><p>An exploratory satellite-systems prompt about payloads, power, and communications. A learning concept, not a mission design.</p></div>
+            <div class="project-notes" id="concept-lagrange" hidden><p><strong>DETAILS WITHHELD</strong><br>No project specifications provided.</p></div>
           </article>
           <article class="project-card reveal">
-            <div class="project-art art-two" aria-label="A small planet surrounded by a glowing orbit" role="img"><span class="art-label">Farpoint</span></div>
+            <div class="project-art art-two" aria-label="A small planet surrounded by a glowing orbit with redacted stamp" role="img"><span class="art-label">Farpoint</span><span class="redaction-stamp" title="Top secret? No, just a concept study." aria-hidden="true">REDACTED</span></div>
             <div class="project-info"><div><h3>Farpoint</h3><p>Aerospace systems · Concept study</p></div><button class="project-arrow" type="button" aria-label="Show concept notes: Farpoint" aria-expanded="false" aria-controls="concept-farpoint"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button></div>
-            <div class="project-notes" id="concept-farpoint" hidden><p>A systems-thinking prompt about how structure, mass, power, and mission goals influence a hypothetical spacecraft. No real vehicle or mission is represented.</p></div>
+            <div class="project-notes" id="concept-farpoint" hidden><p><strong>DETAILS WITHHELD</strong><br>No project specifications provided.</p></div>
           </article>
           <article class="project-card reveal">
-            <div class="project-art art-three" aria-label="A glowing trajectory crossing a field of stars" role="img"><span class="art-label">Starfinder</span></div>
+            <div class="project-art art-three" aria-label="A glowing trajectory crossing a field of stars with redacted stamp" role="img"><span class="art-label">Starfinder</span><span class="redaction-stamp" title="Top secret? No, just a concept study." aria-hidden="true">REDACTED</span></div>
             <div class="project-info"><div><h3>Starfinder</h3><p>Orbital mechanics · Learning model</p></div><button class="project-arrow" type="button" aria-label="Show concept notes: Starfinder" aria-expanded="false" aria-controls="concept-starfinder"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button></div>
-            <div class="project-notes" id="concept-starfinder" hidden><p>A visual learning prompt for exploring orbital paths, velocity, and gravity through simplified, non-operational diagrams.</p></div>
+            <div class="project-notes" id="concept-starfinder" hidden><p><strong>DETAILS WITHHELD</strong><br>No project specifications provided.</p></div>
           </article>
           <article class="project-card reveal">
-            <div class="project-art art-four" aria-label="Illustrative propulsion nozzle and exhaust plume" role="img"><span class="art-label">Impulse</span></div>
+            <div class="project-art art-four" aria-label="Illustrative propulsion nozzle and exhaust plume with redacted stamp" role="img"><span class="art-label">Impulse</span><span class="redaction-stamp" title="Top secret? No, just a concept study." aria-hidden="true">REDACTED</span></div>
             <div class="project-info"><div><h3>Impulse</h3><p>Propulsion · Research notes</p></div><button class="project-arrow" type="button" aria-label="Show concept notes: Impulse" aria-expanded="false" aria-controls="concept-propulsion"><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg></button></div>
-            <div class="project-notes" id="concept-propulsion" hidden><p>Research questions around thrust, efficiency, and thermal limits across different propulsion approaches. Educational exploration only.</p></div>
+            <div class="project-notes" id="concept-propulsion" hidden><p><strong>DETAILS WITHHELD</strong><br>No project specifications provided.</p></div>
           </article>
         </div>
       </div>
@@ -377,7 +382,7 @@
   </main>
 
   <footer class="wrap footer">
-    <span>© <span id="year"></span> Seraphim. Always looking up.</span>
+    <span>© <span id="year"></span> Seraphim. <button class="footer-motto" id="motto-toggle" type="button" aria-label="Show English translation" title="Click for a translation" aria-live="polite">Semper ad Caelum</button></span>
     <div class="footer-links">
       <a href="https://github.com/Seraphim01-S?tab=projects" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       <a href="https://www.instagram.com/kajelf/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
@@ -585,6 +590,12 @@
     window.addEventListener('scroll', updateScrollEffects, { passive: true });
 
     document.querySelector('#year').textContent = new Date().getFullYear();
+    const mottoToggle = document.querySelector('#motto-toggle');
+    mottoToggle.addEventListener('click', () => {
+      const showEnglish = mottoToggle.textContent === 'Semper ad Caelum';
+      mottoToggle.textContent = showEnglish ? 'Always toward the sky' : 'Semper ad Caelum';
+      mottoToggle.setAttribute('aria-label', showEnglish ? 'Show motto in Latin' : 'Show English translation');
+    });
     const revealItems = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
